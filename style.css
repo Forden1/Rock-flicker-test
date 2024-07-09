@@ -53,9 +53,10 @@ img{
     display: block;   
 }
 body {
-        transform: scale(0.8);
+    transform: scale(0.7);
+    
     overflow: hidden; /* Prevent unnecessary scrollbars */
-    margin-top: vh;
+    margin-top: -30vh;
     background-image: url('360_F_634382619_pvMY6CtgERYA8401Zhf6HiwtWduWXLgp.jpg'); /* Replace with your image path */
     background-size: cover; /* Ensures the image covers the entire viewport */
     background-position: center; /* Centers the image */
@@ -110,11 +111,13 @@ body {
    width: 230px;
    height: 300px;
     opacity: 0;
+    border: solid black 5px;
     transition: opacity 0.3s ease-in-out;
   }
   .show {
     opacity: 1 !important;
     transition: opacity 0.1s ease-in-out; /* Adjust transition speed */
+    
  
   }
   .choice1 .image-container {
@@ -126,7 +129,7 @@ body {
     width: 230px;
     height: 300px; 
     transition: opacity 0.3s ease-in-out;
-    border: solid black 5px;}
+    }
   .whole.image-container img {
     position: absolute;
     margin-left: -238;
