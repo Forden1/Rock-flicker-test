@@ -1,0 +1,138 @@
+*{
+    color: navajowhite;
+    text-shadow: 300pt;
+}
+.btn{
+    padding: 0;
+    background-color: white;
+    width: 100px;  /* Adjust width as needed */
+    height: 130px;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    gap: px;
+    
+}
+.choice img{
+
+    border: solid black 5px;
+
+    transition: opacity 0.3s ease-in-out;
+}
+#btns{
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+    gap: 12px;
+}
+#whole{
+    text-align: center;
+    margin-top: 25vh;
+    
+}
+p{
+    font-size: ;
+}
+#onediv{
+    padding-top: 10c;
+    padding-left: 40vh;
+    padding-right: 40vh;
+    padding-bottom: 6vh;
+    display: flex;
+    justify-content: space-between;
+    font-size: 25pt;
+}
+h1{
+    padding-bottom: 0vh;
+}
+img{
+    width: 100%; 
+    height: 125px;
+    object-fit: cover; /* Ensure the image covers the entire button */
+    display: block;   
+}
+body {
+        transform: scale(0.8);
+    overflow: hidden; /* Prevent unnecessary scrollbars */
+    margin-top: vh;
+    background-image: url('360_F_634382619_pvMY6CtgERYA8401Zhf6HiwtWduWXLgp.jpg'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire viewport */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Keeps the background fixed during scrolling */
+     /* Removes default margin around the body */
+    height: 100vh; /* Ensures the body takes up the full viewport height */
+    
+}
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(5);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+    z-index: 1; /* Ensure overlay is on top */
+}
+
+.content {
+    position: relative;
+    z-index: 2; /* Ensure content is on top of the overlay */
+    color: white; /* Text color */
+    padding: 20px; /* Padding around the text */
+}
+#onediv .choice{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+#onediv img{
+    padding-top: ;
+    width: 230px;
+    height: 300px; 
+    
+
+}
+#res{
+    font-size: 20pt;
+    font-weight: bold;
+}
+.whole .image-container {
+    padding-left: ;
+    margin: 0;
+  }
+  .choice1 .image-container img {
+   position: absolute;
+   padding-left: vh;
+   width: 230px;
+   height: 300px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .show {
+    opacity: 1 !important;
+    transition: opacity 0.1s ease-in-out; /* Adjust transition speed */
+ 
+  }
+  .choice1 .image-container {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    width: 230px;
+    height: 300px; 
+    transition: opacity 0.3s ease-in-out;
+    border: solid black 5px;}
+  .whole.image-container img {
+    position: absolute;
+    margin-left: -238;
+     max-width: 100px;
+     max-height: 100px;
+     overflow: hidden;
+     opacity: 0;
+     transition: opacity 0.3s ease-in-out;
+   }

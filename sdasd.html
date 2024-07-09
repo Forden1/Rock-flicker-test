@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rock Paper Scissors Animation</title>
+<style>
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+  }
+  .image-container img {
+    position: absolute;
+    max-width: 100px;
+    max-height: 100px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .show {
+    opacity: 1 !important;
+    transition: opacity 0.1s ease-in-out; /* Adjust transition speed */
+ 
+  }
+  .choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .choice img {
+    max-width: 50px;
+    max-height: 50px;
+  }
+</style>
+</head>
+<body>
+  <div class="image-container">
+    <img id="rock-img" src="rock.png" alt="Rock">
+    <img id="paper-img" src="paper.png" alt="Paper">
+    <img id="scissors-img" src="scissors.png" alt="Scissors">
+  </div>
+  <div id="results"></div>
+  <button id="rock">Rock</button>
+  <button id="paper">Paper</button>
+  <button id="scissors">Scissors</button>
+
+<script>
+  const resultsDiv = document.querySelector("#results");
+  const btn1 = document.querySelector("#rock");
+  const btn2 = document.querySelector("#paper");
+  const btn3 = document.querySelector("#scissors");
+
+  const images = [
+    document.getElementById('rock-img'),
+    document.getElementById('paper-img'),
+    document.getElementById('scissors-img')
+  ];
+
+  function getComputerChoice() {
+  return new Promise(resolve => {
+    // Hide all images initially
+    images.forEach(img => img.style.opacity = 0);
+
+    // Flash images in random order, one at a time
+    const flashOrder = shuffleArray([0, 1, 2]);
+    flashImages(flashOrder).then(() => {
+      // Randomly choose one image after all flashes
+      const randIndex = Math.floor(Math.random() * images.length);
+      const chosenImage = images[randIndex];
+      chosenImage.classList.add('show');
+      resolve(chosenImage); // Resolve with the chosen image element
+    }).catch(err => console.error(err));
+  });
+}
+
+
+  // Function to flash images in random order, one at a time
+  async function flashImages(order) {
+    let delay = 0;
+    const increment = 200; // Speed up increment (milliseconds)
+
+    for (let i = 0; i < order.length; i++) {
+      await flashImage(order[i], delay);
+      delay += increment;
+    }
+  }
+
+  // Function to flash a single image
+  function flashImage(index, delay) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        images[index].classList.add('show');
+        setTimeout(() => {
+          images[index].classList.remove('show');
+          resolve();
+        }, 300); // Adjust flash duration (milliseconds)
+      }, delay); // Adjust delay between flashes (milliseconds)
+    });
+  }
+
+  // Function to shuffle array
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  function getHumanChoice() {
+    return new Promise((resolve) => {
+      btn1.addEventListener("click", () => resolve("rock"), { once: true });
+      btn2.addEventListener("click", () => resolve("paper"), { once: true });
+      btn3.addEventListener("click", () => resolve("scissors"), { once: true });
+    });
+  }
+
+  let humanScore = 0;
+  let computerScore = 0;
+  let resultMessage = "";
+
+  async function playRound() {
+  const humanSelection = await getHumanChoice();
+  const computerImage = await getComputerChoice();
+
+  // Determine computer's choice based on the image element
+  let computerSelection;
+  if (computerImage.id === 'rock-img') {
+    computerSelection = 'rock';
+  } else if (computerImage.id === 'paper-img') {
+    computerSelection = 'paper';
+  } else if (computerImage.id === 'scissors-img') {
+    computerSelection = 'scissors';
+  }
+
+  // Determine the result based on selections
+  if (humanSelection == computerSelection) {
+    resultMessage = "Tie!!!";
+  } else if ((humanSelection == "rock" && computerSelection == "scissors") ||
+    (humanSelection == "paper" && computerSelection == "rock") ||
+    (humanSelection == "scissors" && computerSelection == "paper")) {
+    resultMessage = `You Win! ${humanSelection} beats ${computerSelection}`;
+    humanScore += 1;
+  } else {
+    resultMessage = `You Lose! ${computerSelection} beats ${humanSelection}`;
+    computerScore += 1;
+  }
+
+  // Display the results in the results div
+  resultsDiv.innerHTML = `
+    <h2>${resultMessage}</h2>
+    <div id="onediv">
+      <div class="choice">
+        <p>Human choice:</p>
+        <img src="${humanSelection}.png">
+      </div>
+      <div class="choice">
+        <p>Computer choice:</p>
+        
+      </div>
+    </div>
+    <p id="res">Score: Human: ${humanScore} Computer: ${computerScore}</p>
+  `;
+}
+
+
+  async function startGame() {
+    while (true) {
+      await playRound();
+    }
+  }
+
+  startGame();
+</script>
+</body>
+</html>
